@@ -8,6 +8,10 @@ Statische site (HTML/CSS/JS), zonder framework. Je kunt hem op elke host zetten:
 - `fonts/`: League Spartan en Instrument Serif. Die staan lokaal, dus er is geen verbinding met Google nodig (prettig voor de AVG)
 - `images/`: foto's
 
+## Live zetten
+- **Voorbeeld:** GitHub Pages (Settings → Pages → Deploy from a branch → main / root).
+- **Definitief:** Netlify → Add new site → Import from GitHub → kies deze repo. Build command leeg laten, publish directory `.` (staat ook in `netlify.toml`). Daarna het domein nieuwekijkopwerk.nl koppelen in Netlify en de DNS bij de domeinregistrar omzetten.
+
 ## Nog te doen
 1. Zet `maaike.jpg` en `pam.jpg` in `images/`. Tot die er staan, haalt de site de foto's op van de huidige Lovable-site. Zodra Lovable offline gaat, verdwijnen ze daar.
 2. De tekst van Pam is voorlopig. Die komt in `over-ons.html` bij `id="pam"`.

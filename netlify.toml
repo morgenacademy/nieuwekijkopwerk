@@ -1,0 +1,8 @@
+# Statische site: geen build nodig, Netlify publiceert de hoofdmap.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
