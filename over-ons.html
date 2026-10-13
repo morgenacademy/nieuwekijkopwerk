@@ -137,10 +137,20 @@
 
 <footer class="dark contact" id="contact" data-dark>
   <div class="wrap">
-    <p class="contact__big lines">
-      <span class="ln" style="--n:0"><span>Even</span></span>
-      <span class="ln" style="--n:1"><span>sparren<span class="dot">?</span></span></span>
-    </p>
+    <div class="contact__head">
+      <p class="contact__big lines">
+        <span class="ln" style="--n:0"><span>Even</span></span>
+        <span class="ln" style="--n:1"><span>sparren<span class="dot">?</span></span></span>
+      </p>
+      <div class="foot-eye" data-reveal="eye" aria-hidden="true">
+        <svg viewBox="-10 -10 120 120">
+          <defs><mask id="m-foot"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/><circle cx="38" cy="47" r="10" fill="#000"/></mask></defs>
+          <circle class="foot-eye__ring" cx="46" cy="56" r="34" fill="none" stroke="#00ccad" stroke-width="9"/>
+          <g class="foot-eye__look"><g class="foot-eye__blink"><circle cx="48" cy="58" r="20" fill="#00ccad" mask="url(#m-foot)"/></g></g>
+          <circle class="foot-eye__dot" cx="85" cy="15" r="10" fill="#ef4776"/>
+        </svg>
+      </div>
+    </div>
     <div class="contact__rows">
       <a href="tel:0619164927"><small>Bellen</small><strong>06 1916 4927</strong></a>
       <a href="https://wa.me/31619164927" target="_blank" rel="noopener"><small>WhatsApp</small><strong>Stuur een bericht</strong></a>

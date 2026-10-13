@@ -157,3 +157,53 @@
     q.scrollBy({ left: step * Number(b.dataset.q), behavior: reduce ? 'auto' : 'smooth' });
   }));
 })();
+
+/* ---------- footer eye: kijkt mee ---------- */
+(() => {
+  const eye = document.querySelector('.foot-eye');
+  if (!eye) return;
+  const look = eye.querySelector('.foot-eye__look');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MAX = 8.5;                     // maximale uitslag van de pupil (in viewBox-eenheden)
+  let tx = 0, ty = 0, x = 0, y = 0, lastMove = 0, raf = null;
+
+  function aim(px, py) {
+    const r = eye.getBoundingClientRect();
+    const cx = r.left + r.width * (56 / 120), cy = r.top + r.height * (68 / 120);
+    const dx = px - cx, dy = py - cy;
+    const d = Math.hypot(dx, dy) || 1;
+    const k = Math.min(1, d / 260);
+    tx = dx / d * MAX * k; ty = dy / d * MAX * k;
+    lastMove = performance.now();
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function tick(t) {
+    // geen muis? dan rustig rondkijken
+    if (t - lastMove > 2500) { tx = Math.sin(t / 1300) * MAX * .7; ty = Math.cos(t / 1700) * MAX * .4; }
+    x += (tx - x) * .12; y += (ty - y) * .12;
+    look.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`;
+    raf = requestAnimationFrame(tick);
+  }
+  if (reduce) return;
+
+  // alleen animeren als de footer in beeld is
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+    else if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }).observe(eye);
+
+  window.addEventListener('pointermove', e => aim(e.clientX, e.clientY), { passive: true });
+
+  // hover op een contactknop: het oog kijkt ernaar en wordt enthousiast
+  document.querySelectorAll('.contact__rows a').forEach(a => {
+    a.addEventListener('pointerenter', () => eye.classList.add('is-wow'));
+    a.addEventListener('pointerleave', () => eye.classList.remove('is-wow'));
+    a.addEventListener('focus', () => { const r = a.getBoundingClientRect(); aim(r.left + r.width / 2, r.top); eye.classList.add('is-wow'); });
+    a.addEventListener('blur', () => eye.classList.remove('is-wow'));
+  });
+
+  // klik op het oog: knipoog
+  eye.addEventListener('click', () => {
+    eye.classList.remove('is-wink'); void eye.offsetWidth; eye.classList.add('is-wink');
+  });
+})();

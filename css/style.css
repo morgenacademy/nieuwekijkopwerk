@@ -419,3 +419,25 @@ html, body { overflow-x: clip; }
 .vos li { align-items: center; }
 #amber.dark { background: var(--navy); }
 .route--1 .route__link, .route--2 .route__link { border-bottom-color: var(--teal); }
+
+/* ---------- footer eye ---------- */
+.contact__head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; margin-bottom: clamp(40px, 5vw, 64px); }
+.contact__head .contact__big { margin: 0; }
+.foot-eye { width: clamp(150px, 26vw, 380px); margin-bottom: -1vw; cursor: pointer; }
+.foot-eye svg { width: 100%; height: auto; overflow: visible; display: block; }
+.foot-eye__look { transform-box: view-box; will-change: transform; }
+.foot-eye__blink { transform-box: view-box; transform-origin: 48px 58px; animation: blink 6s infinite; }
+.foot-eye__ring { transform-box: view-box; transform-origin: 46px 56px; transition: transform .6s var(--ease); }
+.foot-eye__dot { transform-box: view-box; transform-origin: 85px 15px; transition: transform .5s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+.foot-eye.is-wow .foot-eye__ring { transform: scale(1.08); }
+.foot-eye.is-wow .foot-eye__dot { transform: translate(4px, -6px) scale(1.5); }
+.foot-eye.is-wow .foot-eye__blink { animation: none; transform: scale(1.18); transition: transform .4s var(--ease); }
+.foot-eye.is-wink .foot-eye__blink { animation: wink .5s var(--ease); }
+@keyframes wink { 0%, 100% { transform: scaleY(1); } 40% { transform: scaleY(.06); } }
+.js [data-reveal="eye"] { opacity: 0; transform: scale(.2) rotate(-200deg); transition: opacity .8s var(--ease), transform 1.4s cubic-bezier(.2, 1.4, .3, 1); }
+.js [data-reveal="eye"].in { opacity: 1; transform: none; }
+@media (max-width: 700px) {
+  .contact__head { grid-template-columns: 1fr; }
+  .foot-eye { order: -1; justify-self: end; width: 120px; margin: 0; }
+}
